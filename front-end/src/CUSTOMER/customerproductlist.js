@@ -1,36 +1,47 @@
-import React, {useEffect, useState} from "react";
+import React from 'react';
+import { useEffect,useState } from 'react';
+import MaterialTable from 'material-table'
+import { ThemeProvider, createTheme } from '@mui/material'
 
-const ProductList=()=>{
-    const [product, setProducts]= useState([]);
+const sample = () => {
+  const [product, setProducts]= useState([]);
 
-    
-    return(
-        <div className="prod-list">
-            <h1>Product List</h1>
-            <ul>
-                <li>Images</li>
-                <li>Name</li>
-                <li>Description</li>
-                <li>Price</li>
-                <li>Discount</li>
-                <li>Stock</li>
-                <li>Company</li>
-            </ul>
-            {
-                product.map((item,itemselect)=>
-                        <ul key={itemselect}>
-                            <img className="imagebox" alt="" src={`http://localhost:5000/${item?.picture}`} />
-                            <li>{item.name}</li>
-                            <li>{item.description}</li>
-                            <li>{item.price}</li>
-                            <li>{item.discount}</li>
-                            <li>{item.stock}</li>
-                            <li>{item.company}</li>
-                        </ul>
-                ) 
-            }
-        </div>
-    )
-}
+    useEffect(()=>{
+        getProduct();
+    },[])
 
-export default ProductList;
+    const getProduct=async()=>{
+        let result = await fetch('http://localhost:5000/viewproduct');
+        result = await result.json();
+        setProducts(result);
+    }
+  const defaultMaterialTheme = createTheme()
+  return (
+    <div>
+      <ThemeProvider theme={defaultMaterialTheme}>
+      <MaterialTable
+      title="Products"
+      columns={[
+        {title: 'Image', render: rowData=><img alt="" className='imagebox' src={`http://localhost:5000${rowData.picture}`}/>},
+        {title:'Name', field:'name'},
+        {title:'Description', field:'description'},
+        {title:'Category', field:'category'},
+        {title:'SubCategory', field:'subcategory'},
+        {title:'Price', field:'price'},
+        {title:'Discount', field:'discount'},
+        {title:'Stock', field:'stock'},
+        {title:'Company', field:'company'},
+      ]}
+      data={
+        product
+      }
+      options={{
+        exportButton: true
+      }}
+      />
+</ThemeProvider>
+    </div>
+  );
+};
+
+export default sample;

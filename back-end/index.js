@@ -322,6 +322,7 @@ app.put("/userdelete/:id", async (req, resp) => {
 app.post("/addproduct",upload.single('image'),async (req, resp) => {
   console.log(req.file,req.body,125)
   try {
+    const path = req.file != undefined ? req.file.path.replace(/\\/g,"/"): "";
     var model ={ 
       name : req.body.name,
       description: req.body.description,
@@ -331,7 +332,7 @@ app.post("/addproduct",upload.single('image'),async (req, resp) => {
       discount:req.body.discount,
       stock:req.body.stock,
       company:req.body.company,
-      picture : req.file.path
+      picture : path !="" ? "/" + path : ""
     }
 
     let product = new Product(model);
@@ -342,7 +343,7 @@ app.post("/addproduct",upload.single('image'),async (req, resp) => {
   }
 });
 
-app.get("/viewproduct", async (req, resp) => {
+app.get("/viewproduct",async (req, resp) => {
   try {
     const products = await Product.find();
     if (products.length > 0) {
@@ -357,7 +358,7 @@ app.get("/viewproduct", async (req, resp) => {
 
 app.get("/viewproduct/:id", async (req, resp) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find({_id:req.params.id});
     if (products.length > 0) {
       resp.send(products);
     } else {
@@ -426,6 +427,19 @@ app.get("/viewcategory", async (req, resp) => {
   }
 });
 
+app.get("/viewcategory/:id", async(req, resp) => {
+  try {
+    const category = await Category.find({_id:req.params.id});
+    if (category.length > 0) {
+      resp.send(category);
+    } else {
+      resp.send({ result: "no product found" });
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+
 app.put("/updatecategory/:id", async (req, resp) => {
   try {
     let result = await Category.findByIdAndUpdate(
@@ -465,7 +479,18 @@ app.post("/addsubcategory", async (req, resp) => {
     console.log(e.message);
   }
 });
-
+app.get("/viewsubcategory/:id", async (req, resp) => {
+  try {
+    const subcategory = await Subcategory.find({_id:req.params.id});
+    if (subcategory.length > 0) {
+      resp.send(subcategory);
+    } else {
+      resp.send({ result: "no product found" });
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+});
 app.get("/viewsubcategory", async (req, resp) => {
   try {
     const subcategory = await SubCategory.find().populate("category", "name");

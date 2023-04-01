@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
+import {useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
     const [name, setName] = useState('');
@@ -72,7 +72,9 @@ const SignUp = () => {
     },[selectedCountry,selectedState])
 
     const collectData = async (e) => {
-        alert("You are Registered.")
+        e.preventDefault();
+        alert(name)
+        if(name != null && email != null && gender != null && selectedCountry!=null && selectedState!=null && selectedCity != null && address!=null && contact!=null && password!=null){
         let result = await fetch("http://localhost:5000/register", {
             method: 'post',
             body: JSON.stringify({ name, email, password, country:selectedCountry.name, state: selectedState.name, city: selectedCity.name , address, gender, contact }),
@@ -82,76 +84,110 @@ const SignUp = () => {
         });
         result = await result.json();
         console.warn(result);
+        alert("you are registered :)");
         //localStorage.setItem('user',JSON.stringify(result.result));
         localStorage.setItem('token',JSON.stringify(result.auth));
-        navigate("/Pages/login");
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'You Are Registered.',
+            showConfirmButton: false,
+            timer: 1000
+          })
+          navigate('/pages/login')
+        }
     }
 
     const handleCountrySelect = e => {
-        setSelectedCountry(JSON.parse(e.target.value));
+        try {
+            setSelectedCountry(JSON.parse(e.target.value));    
+        } catch{
+            e.preventDefault();
+        }
     }
 
     const handleStateSelect = e => {
-        setSelectedState(JSON.parse(e.target.value));
+        try {
+            setSelectedState(JSON.parse(e.target.value));
+        } catch{
+            e.preventDefault();   
+        }
+        
     }
 
     const handleCitySelect = e => {
-        setSelectedCity(JSON.parse(e.target.value));
+        try {
+            setSelectedCity(JSON.parse(e.target.value));    
+        } catch{
+            e.preventDefault();
+        }   
     }
 
     return (
         <div className="register">
-            <h1>Registration</h1>
-            <input className="inputBox" type="text" placeholder="Enter Name"
+            <h1 className='heading'>Registration</h1>
+        <form onSubmit={collectData}>
+            <div>
+            <input className="inputBox" id="name" type="text" placeholder="Enter Name"
                 value={name} onChange={(e) => setName(e.target.value)}
+                required pattern="[A-Za-z]"
             />
             <input className="inputBox" type="email" placeholder="Enter Email"
                 value={email} onChange={(e) => setEmail(e.target.value)}
+                required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
-            <div className="gender">Gender:
-                <input className="radio1" type="radio" name="r1" value="m" onChange={(e)=>setGender(e.target.value)} /><span>Male</span>
-                <input className="radio1" type="radio" name="r1" value="f" onChange={(e)=>setGender(e.target.value)} /><span>Female</span>
+            <div className="inputBox"><label className='genderlabel'>Gender :</label>
+                <input className="radio1" type="radio" name="r1" value="m" onChange={(e)=>setGender(e.target.value)} /><label className='genderlabel'>Male</label>
+                <input className="radio1" type="radio" name="r1" value="f" onChange={(e)=>setGender(e.target.value)} /><label className='genderlabel'>Female</label>
             </div>
-            <div >
-                <Form.Select className="selectitem" onChange={handleCountrySelect}>
-                    <option>Select Country</option>
+                <div className='dwn'>
+                <select onChange={handleCountrySelect} className="selectitem">
+                    <option >Select Country</option>
                     {
                        countryList.map((country)=>(
                             <option key={country.id} value={JSON.stringify(country)}>{country.name}</option>
                         ))
                     }
-                </Form.Select>
-            </div>
-            <div >
-                <Form.Select className="selectitem" onChange={handleStateSelect}>
-                    <option>Select State</option>
+                </select>
+                </div>
+                <div className='dwn'>
+                <select  onChange={handleStateSelect} className="selectitem">
+                    <option >Select State</option>
                     {
                        stateList.map((state)=>(
-                            <option key={state.id} value={JSON.stringify(state)}>{state.name}</option>
+                            <option className='option' key={state.id} value={JSON.stringify(state)}>{state.name}</option>
                         ))
                     }
-                </Form.Select>
-            </div>
-            <div >
-                <Form.Select className="selectitem" onChange={handleCitySelect}>
+                </select>
+                </div>
+                <div className='dwn'>
+                <select onChange={handleCitySelect}className="selectitem">
                     <option>Select City</option>
                     {
                        cityList.map((city)=>(
                             <option key={city.id} value={JSON.stringify(city)}>{city.name}</option>
                         ))
                     }
-                </Form.Select>
-            </div>
+                </select>
+                </div>
             <textarea type="text" className="textarea" value={address} placeholder="Enter address"
                 onChange={(e) => setAddress(e.target.value)} required
+                pattern="[A-Za-z]{}"
             />
-            <input type="number" pattern='[1-9]{1}[0-9]{9}'  className="inputBox" value={contact} placeholder="Enter Contact"
+            <input type="text"  className="inputBox" value={contact} placeholder="Enter Contact"
                 onChange={(e) => setContact(e.target.value)} required
+                pattern='[0-9]{10}'
             />
             <input className="inputBox" type="password" placeholder="Enter Password"
-                value={password} onChange={(e) => setPassword(e.target.value)}
+                value={password} onChange={(e) => setPassword(e.target.value)} required
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             />
-            <button onClick={collectData} className="appButton" type="button">Sign Up</button>
+            {/* <button  className="appButton" type="submit">SignUP</button> */}
+            <div className="btn-5" type="submit">
+                    SIGN-UP
+                </div>
+            </div>
+            </form>
         </div>
     )
 }

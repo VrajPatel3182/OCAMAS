@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
-import {useNavigate,Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+//import validator from 'validator'
 //import jwt from 'jsonwebtoken';
 
 const Login=()=>{
     const [email,setEmail]=React.useState('');
+    //const [emailerr,setEmailerror]=React.useState('');
     const [password,setPassword]=React.useState('');
     const navigate = useNavigate();
 
-    //     const user = jwt.decode(token)
+    //const user = jwt.decode(token)
     useEffect(()=>{
         const auth = localStorage.getItem('auth');
         if(auth==="1"){
@@ -18,8 +20,19 @@ const Login=()=>{
             }
         }
     })
-        
+
+    // const handleEmail = e =>{
+    //     setEmail(e.target.value)
+    //     if (validator.isEmail(email)){
+    //        setEmailerror('')
+    //     } else {
+    //         setEmailerror('Enter valid Email!')
+    //     }
+    // } 
+
+
     const handleLogin= async ()=> {
+        // 
         // console.warn(email,password);
         let result = await fetch('http://localhost:5000/login',{
             method:"post",
@@ -29,14 +42,13 @@ const Login=()=>{
             }
         })
         result = await result.json();
-        // console.warn(result);
+        console.warn(result);
         if(result.auth)
         {
             localStorage.setItem('user',JSON.stringify(result.user));
             localStorage.setItem('userid',JSON.stringify(result.user._id));
             localStorage.setItem('auth',JSON.stringify(result.user.usertype));
             localStorage.setItem('token',JSON.stringify(result.auth));
-            //localStorage.setItem('token',JSON.stringify(result.auth));
             const usertype =  localStorage.getItem('auth');
             if(usertype==="1")
             {
@@ -65,19 +77,30 @@ const Login=()=>{
         //     else{
         //         alert("INVALID USER");
         //     }
-        // }
+        // }   
     }
-     
+  
+    const handlefp = () =>{
+        navigate("/Pages/forgotpassword")
+    }
+
     return(
         <div className="login">
             <h1 className="heading">Login</h1>
-            <input type="text" className="inputBox" placeholder="Username" 
-            onChange={(e)=>setEmail(e.target.value)} value={email} />
-            <input type="password" className="inputBox" placeholder="Password" 
-            onChange={(e)=>setPassword(e.target.value)} value={password}/>
             <div>
-                <button onClick={handleLogin} className="appButton" type="button">Login</button>
-                <Link to="/Pages/forgotpassword">Forgot Password?</Link>
+            <input type="text" className="inputBox" placeholder="Username" 
+            onChange={(e)=>setEmail(e.target.value)} value={email} required/>
+            <input type="password" className="inputBox" placeholder="Password" 
+            onChange={(e)=>setPassword(e.target.value)} value={password} required/>
+                
+                {/* <button onClick={handleLogin} className="appButton" type="submit">Login</button> */}
+                <div onClick={handleLogin} className="btn-5" type="submit">
+                    LOGIN
+                </div>
+                <div onClick={handlefp} className="btn-5" type="submit">
+                    RESET PASSWORD
+                </div>
+                {/* <Link to="/Pages/forgotpassword">Forgot Password?</Link> */}
             </div>
         </div>
     )

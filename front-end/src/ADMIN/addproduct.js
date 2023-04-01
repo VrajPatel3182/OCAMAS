@@ -1,6 +1,5 @@
 import  React,{useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom'
-import Form from 'react-bootstrap/Form';
 
 const AddProduct=()=>{
 
@@ -70,7 +69,7 @@ const AddProduct=()=>{
             body:formData
         })
         result = await result.json();
-        console.warn(result);
+        console.log(result);
         navigate("/admin/products")
     }
 
@@ -92,25 +91,25 @@ const AddProduct=()=>{
             />
             <input className="inputBox" type="text" placeholder="Product Price" onChange={(e)=>setPrice(e.target.value)}
             />
-            <div>
-                <Form.Select className="selectitem" onChange={(e)=>{handleCategorySelect(e)}}>
+            <div className="dwn">
+            <select className="selectitem" onChange={(e)=>{handleCategorySelect(e)}}>
                     <option>--Select Category--</option>
                     {
                         categoryList.map((category)=>(
                             <option key={category._id} value={category._id}>{category.name}</option>
                         ))    
                     }
-                </Form.Select>
+            </select>
             </div>
-            <div>
-                <Form.Select className="selectitem" onChange={(e)=>{handleSubCategorySelect(e)}}>
+            <div className="dwn">
+            <select className="selectitem" onChange={(e)=>{handleSubCategorySelect(e)}}>
                     <option>--Select SubCategory--</option>
                     {
                         subcategoryList.map((subcategory)=>(
                             <option key={subcategory._id} value={subcategory._id}>{subcategory.name}</option>
                         ))    
                     }
-                </Form.Select>
+            </select>
             </div>
             <input className="inputBox" type="text" placeholder="Product discount" onChange={(e)=>setDiscount(e.target.value)}
             />
@@ -118,7 +117,7 @@ const AddProduct=()=>{
             />
             <input className="inputBox" type="text" placeholder="Product Company" onChange={(e)=>setCompany(e.target.value)}
             />
-            <div className="inputbox"> 
+            <div className="imageBox"> 
                 <input className="fileinput" type="file" id="uploadfile" onChange={handleimage}></input>
                 <button onClick={getfile} className="filebutton" placeholder="Image upload">Upload Product Image</button>
                 <label className="imagetext" >{imagename}</label>
