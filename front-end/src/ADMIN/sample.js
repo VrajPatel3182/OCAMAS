@@ -5,7 +5,6 @@ import { ThemeProvider, createTheme } from '@mui/material'
 
 const sample = () => {
   const [product, setProducts]= useState([]);
-
     useEffect(()=>{
         getProduct();
     },[])
@@ -15,6 +14,18 @@ const sample = () => {
         result = await result.json();
         setProducts(result);
     }
+  const [category, setCategory] = useState([]);
+    useEffect(()=>{
+        getCategory();
+    },[])
+    
+  const getCategory=async()=>{
+    let result = await fetch('http://localhost:5000/viewcategory');
+    result = await result.json();
+    setCategory(result);
+  }
+
+
   const defaultMaterialTheme = createTheme()
   return (
     <div>
