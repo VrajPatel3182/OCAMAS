@@ -137,12 +137,12 @@ const SignUp = () => {
                 required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
             <div className="inputBox"><label className='genderlabel'>Gender :</label>
-                <input className="radio1" type="radio" name="r1" value="m" onChange={(e)=>setGender(e.target.value)} /><label className='genderlabel'>Male</label>
+                <input className="radio1" type="radio" name="r1" value="m" onChange={(e)=>setGender(e.target.value)} defaultChecked/><label className='genderlabel'>Male</label>
                 <input className="radio1" type="radio" name="r1" value="f" onChange={(e)=>setGender(e.target.value)} /><label className='genderlabel'>Female</label>
             </div>
                 <div className='dwn'>
                 <select onChange={handleCountrySelect} className="selectitem">
-                    <option >Select Country</option>
+                    <option>Select Country</option>
                     {
                        countryList.map((country)=>(
                             <option key={country.id} value={JSON.stringify(country)}>{country.name}</option>
