@@ -76,9 +76,7 @@ export default function ViewSubCategoryList() {
                     >
                       DELETE
                     </button>
-                    <button className='deletebutton'>
-                      <Link  to={"/admin/updatesubcategory/"+subcategory._id}>UPDATE</Link>
-                    </button>
+                      <Link  to={"/admin/updatesubcategory/"+subcategory._id}><button className='deletebutton'>UPDATE</button></Link>
                   </TableCell>
                 </TableRow>
               ))}

@@ -87,15 +87,7 @@ export default function Categoryist() {
                     >
                       DELETE
                     </button>
-                    <button className="deletebutton">
-                      <Link to={"/admin/updatecategory/"+category._id}>UPDATE</Link>
-                      {/* <Link
-                        to=""
-                        state={{
-                          id: (category._id)
-                        }}
-                      >Update</Link> */}
-                    </button>
+                    <Link to={"/admin/updatecategory/"+category._id}><button className="deletebutton">UPDATE</button></Link>
                   </TableCell>
                 </TableRow>
               ))}
