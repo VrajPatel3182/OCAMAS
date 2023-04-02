@@ -130,7 +130,7 @@ const SignUp = () => {
             <div>
             <input className="inputBox" id="name" type="text" placeholder="Enter Name"
                 value={name} onChange={(e) => setName(e.target.value)}
-                required pattern="[A-Za-z]"
+                required pattern="[A-Za-z]{}"
             />
             <input className="inputBox" type="email" placeholder="Enter Email"
                 value={email} onChange={(e) => setEmail(e.target.value)}
@@ -182,10 +182,10 @@ const SignUp = () => {
                 value={password} onChange={(e) => setPassword(e.target.value)} required
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             />
-            {/* <button  className="appButton" type="submit">SignUP</button> */}
-            <div className="btn-5" type="submit">
+            <button  className="btn-5" type="submit">SignUP</button>
+            {/* <div className="btn-5" type="submit">
                     SIGN-UP
-                </div>
+                </div> */}
             </div>
             </form>
         </div>

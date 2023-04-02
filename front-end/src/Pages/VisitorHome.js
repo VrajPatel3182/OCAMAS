@@ -44,10 +44,12 @@ const VisitorHome = () => {
         console.log(result)
   };
 
+  
+
   return (
     <div>
       <div>
-        <Carousel>
+        {/* <Carousel>
           <Carousel.Item>
             <img
               className="d-block w-100"
@@ -85,7 +87,7 @@ const VisitorHome = () => {
               </p>
             </Carousel.Caption>
           </Carousel.Item>
-        </Carousel>
+        </Carousel> */}
         <div className="">
           <div
             style={{
