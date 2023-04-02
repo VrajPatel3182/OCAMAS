@@ -27,9 +27,9 @@ const AddCategory = () => {
         <input className="inputBox" type="text" name="category" onChange={(e) => {setCategory(e.target.value);}}  
           placeholder="Enter Category Name"
         />
-        <button onClick={categorydata} className="appButton">
-          Add Category
-        </button>
+        <div onClick={categorydata} className="btn-5">
+          ADD CATEGORY
+        </div>
     </div>
   );
 };

@@ -32,9 +32,9 @@ const ChangePassword = () => {
             <h1 className="heading">Change Password</h1>
               <input type="password" className="inputBox" placeholder="New Password" onChange={(e)=>setNewpass(e.target.value)} value={password}/>
               <input type="password" className="inputBox" placeholder="Confirm Password" onChange={(e)=>setConpass(e.target.value)} value={conpass} />
-            <div>
-                <button className="appButton"  type="button" onClick={handlechangepass}>Change</button>
-            </div>
+            
+                <div className="btn-5" type="button" onClick={handlechangepass}>Change</div>
+            
         </div>
     </div>
   )

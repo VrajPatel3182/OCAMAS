@@ -42,10 +42,8 @@ const updateCategory = () => {
     <div className="category">
       <h1 className="heading">Category Update</h1>
       <form onSubmit={handleUpdate}>
-        <table>   
           <input className="inputBox" onChange={(e)=>setCategory(e.target.value)} value={name} required/>
-        </table>
-        <button className='appButton' type='submit'>submit</button>
+        <div className='btn-5' type='submit'>submit</div>
       </form>
     </div>
   )

@@ -35,8 +35,7 @@ const ForgotPassword = () => {
         <div className="login">
             <h1 className="heading">ForgotPassword</h1>
             <input type="text" className="inputBox" placeholder="Enter your Email..." onChange={(e)=>setEmail(e.target.value)} value={email} />
-            <div>
-                <button className="appButton" onClick={handleforgotpassword} type="button">Send OTP</button>
+            <div className="btn-5" onClick={handleforgotpassword} type="button">SEND OTP
             </div>
         </div>
     </div>

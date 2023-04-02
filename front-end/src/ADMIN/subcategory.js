@@ -58,7 +58,7 @@ const AddsubCategory= () => {
                     }
                 </select>
             </div>
-            <button onClick={subcategorydata} className="appButton" type="submit">Add Category</button>
+            <div onClick={subcategorydata} className="btn-5" type="submit">ADD SUB-CATEGORY</div>
     </div>
     )
 }

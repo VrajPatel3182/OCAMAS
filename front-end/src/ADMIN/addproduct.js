@@ -122,7 +122,7 @@ const AddProduct=()=>{
                 <button onClick={getfile} className="filebutton" placeholder="Image upload">Upload Product Image</button>
                 <label className="imagetext" >{imagename}</label>
             </div>
-            <button onClick={ProductData} className="appButton" type="button">Add Product</button>
+            <div onClick={ProductData} className="btn-5" type="button">ADD PRODUCT</div>
         </div> 
     )
 }
