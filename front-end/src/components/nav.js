@@ -78,10 +78,9 @@ const Nav = () => {
                           
                         {/* <Link to="/customer/profile">Profile</Link>*/}
                         {/* <Link to="/customer/cart">CART</Link>*/}
-                        <Link to="/customer/products/productdetails">Product Detail and Purchase</Link>
-                        <Link to="/customer/products">ProductList</Link>
                         <Link to="/customer/home">CustomerHome</Link>
-                        
+                        <Link to="/customer/products">ProductList</Link>
+                        <Link to="/customer/products/productdetails">Product Detail and Purchase</Link>
                         <div class="subnav-user">
                                 <button class="subnavbtn-user"><i class="fa fa-user"></i></button>
                                 <div class="subnav-content-user">
@@ -98,7 +97,7 @@ const Nav = () => {
                     :
                     auth === "0"?
                         <div>
-                            <div className="subnav"><Link to="/admin/home">Home</Link></div>
+                            <Link to="/admin/home">Home</Link>
                             <div class="subnav">
                                 <button class="subnavbtn">Product</button>
                                 <div class="subnav-content">
@@ -133,8 +132,8 @@ const Nav = () => {
                         </div>
                         :
                         <div>
-                            <Link to="/Pages/Login">Login</Link>
-                            <Link to="/Pages/Signup">Signup</Link>
+                            <div className="subnav-user"><Link to="/Pages/Login">Login</Link></div>
+                            <div className="subnav-user"><Link to="/Pages/Signup">Signup</Link></div>
                         </div>
                 }
                 {/* <div class="subnav">

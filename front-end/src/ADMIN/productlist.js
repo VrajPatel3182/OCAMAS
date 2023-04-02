@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import MaterialTable from "material-table";
 import { ThemeProvider, createTheme } from "@mui/material";
 
-const sample = () => {
+const productlist = () => {
   const [product, setProducts] = useState([]);
 
   useEffect(() => {
@@ -51,4 +51,4 @@ const sample = () => {
   );
 };
 
-export default sample;
+export default productlist;
