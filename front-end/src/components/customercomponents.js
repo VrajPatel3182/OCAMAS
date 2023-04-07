@@ -6,7 +6,7 @@ const CustomerComponent=()=>{
     return auth==="1"?
         Outlet(<CustomerComponent/>)
         :
-        <Navigate to="/Pages/login"/>
+        <Navigate to="/"/>
 }
 
 export default CustomerComponent;

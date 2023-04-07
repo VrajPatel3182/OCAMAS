@@ -15,12 +15,12 @@ const productschema = new mongoose.Schema({
     },
     category:{
         type:mongoose.Schema.Types.ObjectId,
-        Ref:'category',
+        ref:'category',
         require:true,
     },
     subcategory:{
         type:mongoose.Schema.Types.ObjectId,
-        Ref:'subcategory',
+        ref:'subcategory',
         require:true,
     },
     discount:{

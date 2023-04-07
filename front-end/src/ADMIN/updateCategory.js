@@ -1,5 +1,6 @@
 import React, { useEffect,useState} from 'react'
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const updateCategory = () => {
 
@@ -22,31 +23,35 @@ const updateCategory = () => {
   }
 
   const handleUpdate = async(e) =>{
-    if(name!=null){
-      let result = fetch(`http://localhost:5000/updatecategory/${params.id}`,{
-      method:'put',
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Upadate it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+      fetch(`http://localhost:5000/updatecategory/${params.id}`,{
+      method:'PUT',
       body:JSON.stringify({name}),
       headers:{
         'Content-Type':"application/json"
       }
+      })
+        Swal.fire("Update!", "Your file has been updated.", "success");
+      }
     });
-    result = await result.json();
-    console.log(result);
-    }else{
-      e.preventDefault();
-    }
-    
-  }
+  };
 
   return (
     <div className="category">
       <h1 className="heading">Category Update</h1>
-      <form onSubmit={handleUpdate}>
           <input className="inputBox" onChange={(e)=>setCategory(e.target.value)} value={name} required/>
-        <div className='btn-5' type='submit'>submit</div>
-      </form>
+        <div onClick={handleUpdate} className='btn-5' type='submit'>UPDATE</div>
     </div>
   )
 }
 
-export default updateCategory
+export default updateCategory;

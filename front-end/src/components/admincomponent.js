@@ -3,10 +3,10 @@ import {Navigate , Outlet} from 'react-router-dom';
 
 const AdminComponent=()=>{
     const auth = localStorage.getItem('auth');
-    return auth==="0"?
+    return auth === "0"?
         Outlet(<AdminComponent/>)
         :
-        <Navigate to="/Pages/login"/>
+        <Navigate to="/"/>
 }
 
 export default AdminComponent;

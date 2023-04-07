@@ -132,7 +132,7 @@ app.post("/register", async (req, res) => {
     });
 
     // Promise.all([existUsername, existEmail])
-    Promise.all([ existEmail])
+    Promise.all([existEmail])
         .then(() => {
             if(password){
                 bcrypt.hash(password, 10)
@@ -345,7 +345,7 @@ app.post("/addproduct",upload.single('image'),async (req, resp) => {
 
 app.get("/viewproduct",async (req, resp) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate("category","name").populate("subcategory","name");
     if (products.length > 0) {
       resp.send(products);
     } else {
@@ -358,7 +358,7 @@ app.get("/viewproduct",async (req, resp) => {
 
 app.get("/viewproduct/:id", async (req, resp) => {
   try {
-    const products = await Product.find({_id:req.params.id});
+    const products = await Product.find({_id:req.params.id}).populate("category","name").populate("subcategory","name");
     if (products.length > 0) {
       resp.send(products);
     } else {
@@ -384,7 +384,6 @@ app.put("/updateproduct/:id", async (req, resp) => {
       { _id: req.params.id },
       { $set: req.body }
     );
-
     resp.send(result);
   } catch (e) {
     console.log(e.message);

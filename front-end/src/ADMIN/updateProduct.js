@@ -1,8 +1,7 @@
-import  React,{useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import React, { useEffect,useState} from 'react'
+import { useParams,useNavigate } from 'react-router-dom';
 
-const AddProduct=()=>{
-
+function updateProduct() {
     const[name,setName]=useState();
     const[description,setDescription]=useState();
     const[price,setPrice]=useState();
@@ -16,32 +15,38 @@ const AddProduct=()=>{
     const[subcategory, setSelectedsubCategory] = useState('');
     const[imagename, setImagename]=useState();
     const navigate = useNavigate();
-    //view category;
-    useEffect(()=>{
-        (async()=>{
-            try{
-                let Category = await fetch('http://localhost:5000/viewcategory')
-                Category =  await Category.json();
-                setCategory(Category)
-            }
-            catch(e){
-                console.warn("view category error", e);
-            }
-        })()
-    },[])
+    const params = useParams();
 
-    const getsubcategorybycategory = async(categoryid)=>{
-        let result = await fetch(`http://localhost:5000/viewsubcategorybycategoryid/${categoryid}`,{
-            method:'get',
-            headers:{
-                'Content-Type':'application/json'
-            }
-        });
-        result = await result.json();
-        console.log(result.data);
-        setSubcategory(result.data);
+  //const navigate = useNavigate();
+  // const location = useLocation();
+  // console.log('location', location.state.id)
+
+  useEffect(()=>{
+    getProduct();
+    (async()=>{
+        try{
+            let Category = await fetch('http://localhost:5000/viewcategory')
+            Category =  await Category.json();
+            setCategory(Category)
+        }
+        catch(e){
+            console.warn("view category error", e);
+        }
+    })()
+  },[])
+
+  const getsubcategorybycategory = async(categoryid)=>{
+    let result = await fetch(`http://localhost:5000/viewsubcategorybycategoryid/${categoryid}`,{
+        method:'get',
+        headers:{
+            'Content-Type':'application/json'
+        }
+    });
+    result = await result.json();
+    console.log(result.data);
+    setSubcategory(result.data);
     }
-    
+
     const handleCategorySelect = e =>{
         setSelectedCategory(e.target.value);
         getsubcategorybycategory(e.target.value);
@@ -81,13 +86,20 @@ const AddProduct=()=>{
         setImage(e.target.files[0])
         setImagename(e.target.files[0].name)
     }
-    return(
-       
-        <div className="Product">
-            <h1 className="heading">ADD Product</h1>
+
+  const getProduct = async() =>{
+    let result = await fetch(`http://localhost:5000/viewproduct/${params.id}`);
+    result =await result.json();
+    setName(result[0].name);
+    setDescription(result[0].description);
+    console.log(result[0])
+  }
+  return (
+    <div className="Product">
+            <h1 className="heading">Update Product</h1>
             <input className="inputBox" type="text" placeholder="Product Name" onChange={(e)=>setName(e.target.value)} value={name}
             />
-            <textarea className="textarea" type="text" placeholder="Product Description" onChange={(e)=>setDescription(e.target.value)}
+            <textarea className="textarea" type="text" placeholder="Product Description" onChange={(e)=>setDescription(e.target.value)} value={description}
             />
             <input className="inputBox" type="text" placeholder="Product Price" onChange={(e)=>setPrice(e.target.value)}
             />
@@ -123,8 +135,8 @@ const AddProduct=()=>{
                 <label className="imagetext" >{imagename}</label>
             </div>
             <div onClick={ProductData} className="btn-5" type="button">ADD PRODUCT</div>
-        </div> 
-    )
+        </div>
+  )
 }
 
-export default AddProduct;
+export default updateProduct

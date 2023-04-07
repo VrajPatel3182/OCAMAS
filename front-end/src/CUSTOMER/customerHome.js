@@ -1,124 +1,62 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import Carousel from 'react-bootstrap/Carousel';
 
 const CustomerHome=()=>{
+  const [product, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+  const getProduct = async () => {
+    let result = await fetch("http://localhost:5000/viewproduct");
+    result = await result.json();
+    console.log(result);
+    setProducts(result);
+  };
     return(
-        <div>
-           <section style="background-color: #eee;">
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-        <div class="card">
-          <div class="d-flex justify-content-between p-3">
-            <p class="lead mb-0">Today's Combo Offer</p>
-            <div
-              class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
-              style="width: 35px; height: 35px;">
-              <p class="text-white mb-0 small">x4</p>
+      <div>
+            <div style={{ display: 'block', width:"100%" , padding: 30 }}>
+              <Carousel>
+                <Carousel.Item interval={3000}>
+                  <img classname="d-block w-100" src={require("../shoes_images/slideone.jpg")} alt="" />
+                </Carousel.Item>
+                <Carousel.Item interval={3000}>
+                  <img classname="d-block w-100" src={require("../shoes_images/slidetwo.jpg")} alt="" />
+                </Carousel.Item>
+                <Carousel.Item interval={3000}>
+                  <img classname="d-block w-100" src={require("../shoes_images/slidethree.jpg")} alt="" />
+                </Carousel.Item>
+              </Carousel>
             </div>
+      <div className="row">
+      {product.map((item,k)=>(
+          <div className="cardp" key={k}>
+          <div className="imgBox">
+            <img
+              src={`http://localhost:5000${item.picture}`}
+              alt="mouse corsair"
+              className="mouse"
+            />
           </div>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
-            class="card-img-top" alt="Laptop" />
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
-              <p class="small text-danger"><s>$1099</s></p>
-            </div>
-
-            <div class="d-flex justify-content-between mb-3">
-              <h5 class="mb-0">HP Notebook</h5>
-              <h5 class="text-dark mb-0">$999</h5>
-            </div>
-
-            <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
-              <div class="ms-auto text-warning">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
+          <div className="contentBox">
+            <h3>{item.name}</h3>
+            <h2 className="price">
+              {item.price}<small></small> ₹
+            </h2>
+            <Link to={`/Customer/Cart/${item._id}`} className="buy">
+              Add to Cart
+            </Link>
+            <Link to={`/Customer/ProductDetails/${item._id}`} className="buy">
+              Show More
+            </Link>
           </div>
         </div>
-      </div>
-      <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
-        <div class="card">
-          <div class="d-flex justify-content-between p-3">
-            <p class="lead mb-0">Today's Combo Offer</p>
-            <div
-              class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
-              style="width: 35px; height: 35px;">
-              <p class="text-white mb-0 small">x2</p>
-            </div>
-          </div>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/7.webp"
-            class="card-img-top" alt="Laptop" />
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
-              <p class="small text-danger"><s>$1199</s></p>
-            </div>
-
-            <div class="d-flex justify-content-between mb-3">
-              <h5 class="mb-0">HP Envy</h5>
-              <h5 class="text-dark mb-0">$1099</h5>
-            </div>
-
-            <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0">Available: <span class="fw-bold">7</span></p>
-              <div class="ms-auto text-warning">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
-        <div class="card">
-          <div class="d-flex justify-content-between p-3">
-            <p class="lead mb-0">Today's Combo Offer</p>
-            <div
-              class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
-              style="width: 35px; height: 35px;">
-              <p class="text-white mb-0 small">x3</p>
-            </div>
-          </div>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/5.webp"
-            class="card-img-top" alt="Gaming Laptop" />
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <p class="small"><a href="#!" class="text-muted">Laptops</a></p>
-              <p class="small text-danger"><s>$1399</s></p>
-            </div>
-
-            <div class="d-flex justify-content-between mb-3">
-              <h5 class="mb-0">Toshiba B77</h5>
-              <h5 class="text-dark mb-0">$1299</h5>
-            </div>
-
-            <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0">Available: <span class="fw-bold">5</span></p>
-              <div class="ms-auto text-warning">
-                <i class="fa fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
-  </div>
-</section>
-
-        </div>
+    </div>
     )
 }
 
