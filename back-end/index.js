@@ -72,8 +72,8 @@ function verifyToken(req, resp, next){
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-      user: "19bmiit078@gmail.com",
-      pass: "ibywfmpbdivbuxrp",
+      user: "pateldharmil09@gmail.com",
+      pass: "ngrbucopleovbdou",
   }
 })
 

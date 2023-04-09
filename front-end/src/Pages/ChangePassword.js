@@ -25,14 +25,19 @@ const ChangePassword = () => {
   }
 
   return (
-    <div>
+   
       <div className="login">
-            <h1 className="heading">Create New Password</h1>
-              <input type="password" className="inputBox" placeholder="New Password" onChange={(e)=>setNewpass(e.target.value)} value={password}/>
-              <input type="password" className="inputBox" placeholder="Confirm Password" onChange={(e)=>setConpass(e.target.value)} value={conpass} />
-            <div className="btn-5"  type="button" onClick={handlechangepass}>CHANGEPASSWORD</div>
+      <h1 className="heading">Create New Password</h1>
+      <form onSubmit={handlechangepass}>
+            
+              <input type="password" className="inputBox" placeholder="New Password" 
+                     onChange={(e)=>setNewpass(e.target.value)} value={password} 
+                     required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
+              <input type="password" className="inputBox" placeholder="Confirm Password" onChange={(e)=>setConpass(e.target.value)} value={conpass} required/>
+            <button className="btn-5"  type="submit" >CHANGE PASSWORD</button>
+            </form> 
         </div>
-    </div>
+    
   )
 }
 

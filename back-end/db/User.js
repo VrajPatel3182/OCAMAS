@@ -43,7 +43,7 @@ const userschema = new mongoose.Schema({
     usertype:{
         type:Number,
         require:true,
-        default:1  
+        default:1
     },
     status:{
         type:Number,

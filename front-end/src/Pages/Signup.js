@@ -130,19 +130,19 @@ const SignUp = () => {
             <div>
             <input className="inputBox" id="name" type="text" placeholder="Enter Name"
                 value={name} onChange={(e) => setName(e.target.value)}
-                required pattern="[A-Za-z]"
+                required pattern="[A-Za-z]{}"
             />
             <input className="inputBox" type="email" placeholder="Enter Email"
                 value={email} onChange={(e) => setEmail(e.target.value)}
                 required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
             <div className="inputBox"><label className='genderlabel'>Gender :</label>
-                <input className="radio1" type="radio" name="r1" value="m" onChange={(e)=>setGender(e.target.value)} /><label className='genderlabel'>Male</label>
+                <input className="radio1" type="radio" name="r1" value="m" onChange={(e)=>setGender(e.target.value)} defaultChecked/><label className='genderlabel'>Male</label>
                 <input className="radio1" type="radio" name="r1" value="f" onChange={(e)=>setGender(e.target.value)} /><label className='genderlabel'>Female</label>
             </div>
                 <div className='dwn'>
                 <select onChange={handleCountrySelect} className="selectitem">
-                    <option >Select Country</option>
+                    <option>Select Country</option>
                     {
                        countryList.map((country)=>(
                             <option key={country.id} value={JSON.stringify(country)}>{country.name}</option>
@@ -182,10 +182,10 @@ const SignUp = () => {
                 value={password} onChange={(e) => setPassword(e.target.value)} required
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             />
-            {/* <button  className="appButton" type="submit">SignUP</button> */}
-            <div className="btn-5" type="submit">
+            <button  className="btn-5" type="submit">SignUP</button>
+            {/* <div className="btn-5" type="submit">
                     SIGN-UP
-                </div>
+                </div> */}
             </div>
             </form>
         </div>
