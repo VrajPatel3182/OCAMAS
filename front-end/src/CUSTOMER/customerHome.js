@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import Carousel from 'react-bootstrap/Carousel';
+// import CarouselHS from 'carousel-react-rcdev'
+import CarouselB from 'react-bootstrap/Carousel';
 
 const CustomerHome=()=>{
   const [product, setProducts] = useState([]);
@@ -19,17 +19,17 @@ const CustomerHome=()=>{
     return(
       <div>
             <div style={{ display: 'block', width:"100%" , padding: 30 }}>
-              <Carousel>
-                <Carousel.Item interval={3000}>
-                  <img classname="d-block w-100" src={require("../shoes_images/slideone.jpg")} alt="" />
-                </Carousel.Item>
-                <Carousel.Item interval={3000}>
-                  <img classname="d-block w-100" src={require("../shoes_images/slidetwo.jpg")} alt="" />
-                </Carousel.Item>
-                <Carousel.Item interval={3000}>
-                  <img classname="d-block w-100" src={require("../shoes_images/slidethree.jpg")} alt="" />
-                </Carousel.Item>
-              </Carousel>
+              <CarouselB>
+                <CarouselB.Item interval={3000}>
+                  <img classname="d-block w-100" src={require("../shoes_images/fwebp.jpg")} alt="" />
+                </CarouselB.Item>
+                <CarouselB.Item interval={3000}>
+                  <img classname="d-block w-100" src={require("../shoes_images/fwebp1.jpg")} alt="" />
+                </CarouselB.Item>
+                <CarouselB.Item interval={3000}>
+                  <img classname="d-block w-100" src={require("../shoes_images/fweb2.jpg")} alt="" />
+                </CarouselB.Item>
+              </CarouselB>
             </div>
       <div className="row">
       {product.map((item,k)=>(

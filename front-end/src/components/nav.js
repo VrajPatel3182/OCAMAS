@@ -10,7 +10,7 @@ const Nav = () => {
         navigate('/')
     }
     const handlecart=()=>{
-        navigate('/Customer/Cart')
+        navigate('/customer/cart')
     }
     
     return (
@@ -20,7 +20,9 @@ const Nav = () => {
                 {
                   auth === "1" ?
                   <div>
-                        <Link to="/customer/home">CustomerHome</Link>
+                        <Link to="/customer/home">Home</Link>
+                        <Link to="/customer/home">About</Link>
+                        <Link to="/customer/home">Contact</Link>
                         {/* <Link to="/customer/productdetails">Product Detail and Purchase</Link> */}
                         <div class="subnav-user">
                                 <button class="subnavbtn-user"><i class="fa fa-user"></i></button>

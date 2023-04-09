@@ -17,7 +17,7 @@ const Purchase = require("./db/Purchase");
 const orders = require("./db/Orders");
 const multer = require('multer');
 const Subcategory = require("./db/Subcategory");
-const Addtocart = require("./db/Addtocart");
+const Addtocart = require("./db/Cart");
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
 //const upload = multer({dest:'./uploads/image'})
@@ -163,8 +163,6 @@ app.post("/register", async (req, res) => {
         }).catch(error => {
             return res.status(500).send({ error })
         })
-
-
 } catch (error) {
     return res.status(500).send(error);
 }
@@ -679,7 +677,7 @@ app.delete("/orders/:id", async (req, resp) => {
 app.post("/addtocart", async (req, resp) => {
   try {
     let addtocart = new Addtocart(req.body);
-    let result = await addtocart.save();
+    let result = await Cart.save();
     resp.send(result);
   } catch (e) {
     console.log(e.message);
