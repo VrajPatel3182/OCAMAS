@@ -53,7 +53,7 @@ function App() {
             <Route element={<CustomerComponent />}>
               <Route path="/customer/home" element={<CustomerHome />} />
               <Route path="/customer/productdetails/:id" element={<ProductDetail/>}/>
-              <Route path="/customer/cart/:id" element={<CustomerCart />} />
+              <Route path="/customer/cart/:id:name" element={<CustomerCart/>} />
               <Route path="/customer/profile" element={<CustomerProfile />} />
               <Route path="/customer/changepassword" element={<Userchangepassword />}/>
             </Route>
