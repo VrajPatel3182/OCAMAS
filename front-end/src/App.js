@@ -13,6 +13,7 @@ import ProductDetail from "./CUSTOMER/productDetail";
 import AddCategory from "./ADMIN/category";
 import AddsubCategory from "./ADMIN/subcategory";
 import VisitorHome from "./Pages/VisitorHome";
+import AdminHome from "./ADMIN/adminHome";
 import CustomerProfile from "./CUSTOMER/customerProfile";
 import ViewCategory from "./ADMIN/viewCategory";
 import ViewSubCategory from "./ADMIN/viewSubCategory";
@@ -38,7 +39,7 @@ function App() {
           <Nav />
           <Routes>
             <Route element={<AdminComponent />}>
-              <Route path="/admin/home" element={<h1>Admin Home</h1>} />
+              <Route path="/admin/home" element={<AdminHome />} />
               <Route path="/admin/products" element={<ViewProduct />} />
               <Route path="/admin/addproduct" element={<AddProduct />} />
               <Route path="/admin/addcategory" element={<AddCategory />} />

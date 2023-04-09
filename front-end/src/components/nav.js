@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 const Nav = () => {
@@ -69,7 +68,6 @@ const Nav = () => {
                                 <div class="subnav-content-user">
                                     <Link to="/admin/profile">Profile</Link>
                                     {/* <Link to="/Pages/Settings">Settings</Link> */}
-                                    <Link to="/Pages/Changepassword">ChangePassword</Link>
                                     <Link onClick={logout} to="/"><b>Logout({JSON.parse(user).name})</b></Link>
                                 </div>
                             </div>
