@@ -21,13 +21,13 @@ const CustomerHome=()=>{
             <div style={{ display: 'block', width:"100%" , padding: 30 }}>
               <CarouselB>
                 <CarouselB.Item interval={3000}>
-                  <img classname="d-block w-100" src={require("../shoes_images/fwebp.jpg")} alt="" />
+                  <img className="d-block w-100" src={require("../shoes_images/fwebp.jpg")} alt="" />
                 </CarouselB.Item>
                 <CarouselB.Item interval={3000}>
-                  <img classname="d-block w-100" src={require("../shoes_images/fwebp1.jpg")} alt="" />
+                  <img className="d-block w-100" src={require("../shoes_images/fwebp1.jpg")} alt="" />
                 </CarouselB.Item>
                 <CarouselB.Item interval={3000}>
-                  <img classname="d-block w-100" src={require("../shoes_images/fweb2.jpg")} alt="" />
+                  <img className="d-block w-100" src={require("../shoes_images/fweb2.jpg")} alt="" />
                 </CarouselB.Item>
               </CarouselB>
             </div>
