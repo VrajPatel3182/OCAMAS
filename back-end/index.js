@@ -282,7 +282,7 @@ app.get("/viewuser/:id", async (req, resp) => {
   try {
     const id = req.params.id
     let result = await User.findById(id);
-    console.log(result)
+    // console.log(result)
     if (result) {
       resp.send(result);
     } else {

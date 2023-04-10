@@ -12,9 +12,10 @@ const CustomerProfile = () => {
   const [cityList, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState();
   const [selectedState, setSelectedState] = useState();
-  const [selectedCity, setSelectedCity] = useState();
-   const tmpcountry = JSON.stringify(countryList);
-   console.log(JSON.parse(tmpcountry)[profile.country])
+  const [setSelectedCity] = useState();
+  const tmpcountry = (countryList[101]);
+  
+  console.log(tmpcountry)
   
   
   // console.log(profile);

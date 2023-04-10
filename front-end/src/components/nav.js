@@ -10,7 +10,7 @@ const Nav = () => {
         navigate('/')
     }
     const handlecart=()=>{
-        navigate('/customer/cart')
+        navigate('/customer/cart/:id')
     }
     
     return (
