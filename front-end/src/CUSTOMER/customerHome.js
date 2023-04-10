@@ -13,7 +13,7 @@ const CustomerHome=()=>{
   const getProduct = async () => {
     let result = await fetch("http://localhost:5000/viewproduct");
     result = await result.json();
-    console.log(result);
+    // console.log(result); 
     setProducts(result);
   };
     return(
