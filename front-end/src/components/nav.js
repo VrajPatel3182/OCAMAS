@@ -34,8 +34,9 @@ const Nav = () => {
                                 </div>
                         </div>
                         <div class="subnav-user">
-                            <button onClick={handlecart} class="subnavbtn-user"><i  class="fa fa-shopping-cart"></i>
-                           </button>
+                            {/* <button onClick={handlecart} class="subnavbtn-user"><i  class="fa fa-shopping-cart"></i>
+                           </button> */}
+                           <Link to="/customer/Cart" className="fa fa-shopping-cart">Cart</Link>
                         </div>
                     </div>
                     :

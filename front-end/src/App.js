@@ -29,7 +29,7 @@ import CustomerCart from "./CUSTOMER/customerCart";
 import CustomerHome from "./CUSTOMER/customerHome";
 //import ProductList from './CUSTOMER/customerproductlist';
 // import Sample from "./ADMIN/sample";
-
+import Cart from "./CUSTOMER/Cart";
 
 function App() {
   
@@ -54,7 +54,10 @@ function App() {
             <Route element={<CustomerComponent />}>
               <Route path="/customer/home" element={<CustomerHome />} />
               <Route path="/customer/productdetails/:id" element={<ProductDetail/>}/>
-              <Route path="/customer/cart/:id:name" element={<CustomerCart/>} />
+              {/* <Route path="/customer/cart/:id:name" element={<CustomerCart/>} /> */}
+              <Route path="/customer/customerCart" element={<CustomerCart/>} />
+              <Route path="/customer/Cart" element={<Cart />} />
+             
               <Route path="/customer/profile" element={<CustomerProfile />} />
               <Route path="/customer/changepassword" element={<Userchangepassword />}/>
             </Route>
