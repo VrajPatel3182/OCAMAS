@@ -31,7 +31,7 @@ import CustomerAboutus from "./CUSTOMER/customerAboutus";
 import CustomerContactus from "./CUSTOMER/customerContactus";
 //import ProductList from './CUSTOMER/customerproductlist';
 // import Sample from "./ADMIN/sample";
-
+import Cart from "./CUSTOMER/Cart";
 
 function App() {
   
@@ -58,7 +58,10 @@ function App() {
               <Route path="/customer/aboutus" element={<CustomerAboutus />} />
               <Route path="/customer/contactus" element={<CustomerContactus />} />
               <Route path="/customer/productdetails/:id" element={<ProductDetail/>}/>
-              <Route path="/customer/cart/:id:name" element={<CustomerCart/>} />
+              {/* <Route path="/customer/cart/:id:name" element={<CustomerCart/>} /> */}
+              <Route path="/customer/customerCart" element={<CustomerCart/>} />
+              <Route path="/customer/Cart" element={<Cart />} />
+             
               <Route path="/customer/profile" element={<CustomerProfile />} />
               <Route path="/customer/changepassword" element={<Userchangepassword />}/>
             </Route>

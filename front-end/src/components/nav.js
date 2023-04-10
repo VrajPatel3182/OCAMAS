@@ -33,9 +33,10 @@ const Nav = () => {
                                     <Link onClick={logout} to="/"><b>Logout({JSON.parse(user).name})</b></Link>
                                 </div>
                         </div>
-                        <div className="subnav-user">
-                            <button onClick={handlecart} className="subnavbtn-user"><i  className="fa fa-shopping-cart"></i>
-                           </button>
+                        <div class="subnav-user">
+                            {/* <button onClick={handlecart} class="subnavbtn-user"><i  class="fa fa-shopping-cart"></i>
+                           </button> */}
+                           <Link to="/customer/Cart" className="fa fa-shopping-cart">Cart</Link>
                         </div>
                     </div>
                     :
