@@ -1,9 +1,23 @@
 import * as React from "react";
-//import { useEffect,useState } from "react";
+import { useEffect,useState } from "react";
 
 const AdminProfile = () => {
 
-  const name = localStorage.getItem('user');
+  const user = localStorage.getItem('user');
+  const userid = JSON.parse(localStorage.getItem('userid'));
+  const [profile, setProfile] = useState('');
+  // console.log(profile);
+
+  useEffect(() => {
+    getProfile();
+  },[]);
+  const getProfile = async () => {
+    let result = await fetch(`http://localhost:5000/viewuser/${userid}`);
+    result = await result.json();
+    console.log(result)
+    setProfile(result);
+  };
+
 
   return (
     <div className="container" style={{ marginBottom:"40px"}}>
@@ -11,7 +25,7 @@ const AdminProfile = () => {
         <div className="col-12" style={{background:"white"}}>
           {/* Page title */}
           <div className="my-5">
-            <h3>{JSON.parse(name).name}'s Profile</h3>
+            <h3>{JSON.parse(user).name}'s Profile</h3>
             <hr />
           </div>
           {/* Form START */}
@@ -23,29 +37,24 @@ const AdminProfile = () => {
                   <div className="row g-3">
                     <h4 className="mb-4 mt-0">Contact detail</h4>
                     {/* First Name */}
-                    <div className="col-md-6">
-                      <label className="form-label">First Name *</label>
-                      <input type="text" className="form-control" placeholder aria-label="First name" defaultValue="Scaralet" />
+                    <div className="col-md-12">
+                      <label className="form-label">Full Name *</label>
+                      <input type="text" className="form-control" placeholder="" aria-label="First name" defaultValue={profile.name} />
                     </div>
                     {/* Last name */}
-                    <div className="col-md-6">
+                    {/* <div className="col-md-6">
                       <label className="form-label">Last Name *</label>
-                      <input type="text" className="form-control" placeholder aria-label="Last name" defaultValue="Doe" />
-                    </div>
+                      <input type="text" className="form-control" placeholder="" aria-label="Last name" defaultValue="Doe" />
+                    </div> */}
                     {/* Phone number */}
-                    <div className="col-md-6">
-                      <label><i className='fa-solid fa-phone-flip'></i>Phone number *</label>
-                      <input type="text" className="form-control" placeholder aria-label="Phone number" defaultValue="(333) 000 555" />
-                    </div>
-                    {/* Mobile number */}
-                    <div className="col-md-6">
-                      <label className="form-label">Mobile number *</label>
-                      <input type="text" className="form-control" placeholder aria-label="Phone number" defaultValue="+91 9852 8855 252" />
+                    <div className="col-md-12">
+                      <label><i className='fa-solid fa-phone-flip'></i>Contact number *</label>
+                      <input type="text" className="form-control" placeholder="" aria-label="Contact number" defaultValue={profile.contact} />
                     </div>
                     {/* Email */}
-                    <div className="col-md-6">
-                      <label htmlFor="inputEmail4" className="form-label">Email (Also a Username)*</label>
-                      <input type="email" className="form-control" id="inputEmail4" defaultValue="example@homerealty.com" />
+                    <div className="col-md-12">
+                      <label htmlFor="inputEmail4" className="form-label">Email (Also a Username) *</label>
+                      <input type="email" className="form-control" id="inputEmail4" defaultValue={profile.email} />
                     </div>
                   </div> {/* Row END */}
                 </div>
@@ -80,27 +89,27 @@ const AdminProfile = () => {
                     {/* Facebook */}
                     <div className="col-md-12">
                       <label className="form-label"><i className="fa fa-home me-2" />Address *</label>
-                      <textarea type="text" className="form-control" placeholder aria-label="Facebook" defaultValue="http://www.facebook.com" />
+                      <textarea type="text" className="form-control" placeholder="" aria-label="Facebook" defaultValue={profile.address} />
                     </div>
                     {/* Linkedin */}
-                    <div className="col-md-12">
+                    {/* <div className="col-md-12">
                       <label className="form-label"><i className="fas fa-shipping-fast  me-2"></i>Shipping Address *</label>
-                      <textarea type="text" className="form-control" placeholder aria-label="Linkedin" defaultValue="http://www.linkedin.com" />
-                    </div>
+                      <textarea type="text" className="form-control" placeholder="" aria-label="Linkedin" defaultValue="http://www.linkedin.com" />
+                    </div> */}
                     {/* Instragram */}
                     <div className="col-md-6">
                       <label className="form-label"><i className="fas fa-flag me-2" />Country *</label>
-                      <input type="text" className="form-control" placeholder aria-label="Instragram" defaultValue="http://www.instragram.com" />
+                      <input type="text" className="form-control" placeholder="" aria-label="Instragram" defaultValue={profile.country} />
                     </div>
                     {/* Pinterest */}
                     <div className="col-md-6">
                       <label className="form-label"><i className="fas fa-map-marked-alt me-2" />State *</label>
-                      <input type="text" className="form-control" placeholder aria-label="Pinterest" defaultValue="http://www.pinterest.com" />
+                      <input type="text" className="form-control" placeholder="" aria-label="Pinterest" defaultValue={profile.state} />
                     </div>
                     {/* Dribble */}
                     <div className="col-md-6">
                       <label className="form-label"><i className="fas fa-city me-2" />city *</label>
-                      <input type="text" className="form-control" placeholder aria-label="Dribble" defaultValue="http://www.dribble.com" />
+                      <input type="text" className="form-control" placeholder="" aria-label="Dribble" defaultValue={profile.city} />
                     </div>
                     
                   </div> {/* Row END */}
@@ -113,25 +122,28 @@ const AdminProfile = () => {
                     <h4 className="my-4">Change Password</h4>
                     {/* Old password */}
                     <div className="col-md-12">
-                      <label htmlFor="exampleInputPassword1" className="form-label"><i class='fa fa-unlock me-2'></i>Old password *</label>
+                      <label htmlFor="exampleInputPassword1" className="form-label"><i className='fa fa-unlock me-2'></i>Old password *</label>
                       <input type="password" className="form-control" id="exampleInputPassword1" />
                     </div>
                     {/* New password */}
                     <div className="col-md-6">
-                      <label htmlFor="exampleInputPassword2" className="form-label"><i class='fa fa-lock me-2'></i>New password *</label>
+                      <label htmlFor="exampleInputPassword2" className="form-label"><i className='fa fa-lock me-2'></i>New password *</label>
                       <input type="password" className="form-control" id="exampleInputPassword2" />
                     </div>
                     {/* Confirm password */}
                     <div className="col-md-6">
-                      <label htmlFor="exampleInputPassword3" className="form-label"><i class='fa fa-lock me-2'></i>Confirm Password *</label>
+                      <label htmlFor="exampleInputPassword3" className="form-label"><i className='fa fa-lock me-2'></i>Confirm Password *</label>
                       <input type="password" className="form-control" id="exampleInputPassword3" />
                     </div>
                   </div>
                 </div>
+                <div className="gap-3 d-md-flex justify-content-md-center text-center">
+              <button type="button" className="btn btn-primary btn-lg">ChangePassword</button>
+            </div>
               </div>
             </div> {/* Row END */}
             {/* button */}
-            <div className="gap-3 d-md-flex justify-content-md-end text-center">
+            <div className="gap-3 d-md-flex justify-content-md-start text-center">
               <button type="button" className="btn btn-primary btn-lg">Update profile</button>
             </div>
           </form> {/* Form END */}

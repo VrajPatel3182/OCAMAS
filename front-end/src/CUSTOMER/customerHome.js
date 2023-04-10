@@ -20,7 +20,6 @@ const CustomerHome = () => {
     console.log(result);
     setProducts(result);
   };
-
   const addToCart = (product) => {
     const item = cartItems.find((item) => item._id === product._id);
     if (item) {
