@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 //import validator from 'validator'
 //import jwt from 'jsonwebtoken';
@@ -8,6 +8,21 @@ const Login=()=>{
     //const [emailerr,setEmailerror]=React.useState('');
     const [password,setPassword]=React.useState('');
     const navigate = useNavigate();
+
+    useEffect(()=>{
+
+        const auth = localStorage.getItem('auth');
+    
+        if(auth==="1")
+        {
+             navigate("/customer/Home");
+        }else{
+            if(auth==="0")
+            {
+                  navigate("/admin/Home");
+            }
+        } 
+    },[])
 
     //const user = jwt.decode(token)
     // const handleEmail = e =>{

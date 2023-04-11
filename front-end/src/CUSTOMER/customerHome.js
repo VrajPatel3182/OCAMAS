@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import CarouselB from 'react-bootstrap/Carousel';
 
 const CustomerHome = () => {
@@ -21,6 +21,7 @@ const CustomerHome = () => {
     setProducts(result);
   };
   const addToCart = (product) => {
+    window.location.reload(false);
     const item = cartItems.find((item) => item._id === product._id);
     if (item) {
       // If item is already in the cart, increase the quantity
@@ -46,22 +47,22 @@ const CustomerHome = () => {
       <div style={{ display: 'block', width: "100%", padding: 30 }}>
         <CarouselB>
           <CarouselB.Item interval={3000}>
-            <img classname="d-block w-100" src={require("../shoes_images/fwebp.jpg")} alt="" />
+            <img className="d-block w-100" src={require("../shoes_images/fwebp.jpg")} alt="" />
           </CarouselB.Item>
           <CarouselB.Item interval={3000}>
-            <img classname="d-block w-100" src={require("../shoes_images/fwebp1.jpg")} alt="" />
+            <img className="d-block w-100" src={require("../shoes_images/fwebp1.jpg")} alt="" />
           </CarouselB.Item>
           <CarouselB.Item interval={3000}>
-            <img classname="d-block w-100" src={require("../shoes_images/fweb2.jpg")} alt="" />
+            <img className="d-block w-100" src={require("../shoes_images/fweb2.jpg")} alt="" />
           </CarouselB.Item>
         </CarouselB>
       </div>
-      <div className="cart-icon">
+      {/* <div className="cart-icon">
         <Link to="/Customer/Cart">
           <FontAwesomeIcon icon={faShoppingCart} size="2x" />
           <span className="cart-count">{cartItems.length}</span>
         </Link>
-      </div>
+      </div> */}
       <div className="row">
         {products.map((product, index) => (
           <div className="cardp" key={index}>

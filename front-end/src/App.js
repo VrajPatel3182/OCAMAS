@@ -25,7 +25,6 @@ import Userchangepassword from "./CUSTOMER/changepassword";
 import UpdateCategory from "./ADMIN/updateCategory";
 import UpdateSubCategory from "./ADMIN/updateSubCategory";
 import Updateproduct from './ADMIN/updateProduct';
-import CustomerCart from "./CUSTOMER/customerCart";
 import CustomerHome from "./CUSTOMER/customerHome";
 import CustomerAboutus from "./CUSTOMER/customerAboutus";
 import CustomerContactus from "./CUSTOMER/customerContactus";
@@ -59,7 +58,6 @@ function App() {
               <Route path="/customer/contactus" element={<CustomerContactus />} />
               <Route path="/customer/productdetails/:id" element={<ProductDetail/>}/>
               {/* <Route path="/customer/cart/:id:name" element={<CustomerCart/>} /> */}
-              <Route path="/customer/customerCart" element={<CustomerCart/>} />
               <Route path="/customer/Cart" element={<Cart />} />
              
               <Route path="/customer/profile" element={<CustomerProfile />} />

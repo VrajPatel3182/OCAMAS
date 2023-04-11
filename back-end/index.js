@@ -318,7 +318,7 @@ app.put("/userdelete/:id", async (req, resp) => {
 });
 
 app.post("/addproduct",upload.single('image'),async (req, resp) => {
-  console.log(req.file,req.body,125)
+  // console.log(req.file,req.body,125)
   try {
     const path = req.file != undefined ? req.file.path.replace(/\\/g,"/"): "";
     var model ={ 

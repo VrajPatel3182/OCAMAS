@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {faTrash} from '@fortawesome/free-solid-svg-icons'
+// import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState(
@@ -10,6 +11,7 @@ const Cart = () => {
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
+       
         // Calculate the total price of all cart items
         let total = cartItems.reduce(
             (accumulator, current) => accumulator + current.price * current.quantity,
@@ -19,11 +21,13 @@ const Cart = () => {
     }, [cartItems]);
 
     const removeFromCart = (item) => {
+        window.location.reload(false);
         const updatedItems = cartItems.filter((i) => i._id !== item._id);
         setCartItems(updatedItems);
     };
 
     const updateQuantity = (item, quantity) => {
+        
         const updatedItems = cartItems.map((i) =>
             i._id === item._id ? { ...i, quantity } : i
         );
@@ -41,12 +45,12 @@ const Cart = () => {
                 <div className="container padding-bottom-3x mb-1">
                     <div className="table-responsive shopping-cart">
                         <h1>Your Cart</h1>
-                        <div className="cart-icon">
+                        {/* <div className="cart-icon">
                             <Link to="/Customer/Cart">
                                 <FontAwesomeIcon icon={faShoppingCart} size="2x" />
                                 <span className="cart-count">{cartItems.length}</span>
                             </Link>
-                        </div>
+                        </div> */}
                         <table className="table">
                             <thead>
                                 <tr>
@@ -65,14 +69,15 @@ const Cart = () => {
                                             <img src={`http://localhost:5000${item.picture}`} alt="product" style={{ width: "100px" }} />
                                         </td>
                                         <td>
-                                            <Link to={`/Customer/ProductDetails/${item._id}`}>
+                                            <Link className="text-center" to={`/Customer/ProductDetails/${item._id}`}>
                                                 {item.name}
                                             </Link>
                                         </td>
 
                                         <td className="text-center" >₹{item.price}</td>
-                                        <td className="text-center" >
+                                        <td className="text-center">
                                             <input
+                                                style={{textAlign:"center"}}
                                                 className="count-input"
                                                 type="number"
                                                 min="1"
@@ -91,25 +96,25 @@ const Cart = () => {
                                     </tr>
                                 ))}
                                 <tr>
-                                    <td colSpan="3" className="total">
-                                        Total Price:
-                                    </td>
-                                    <td colSpan="2" className="total">
-                                        ₹{totalPrice}
+                                    <td colSpan="12" style={{textAlign:"end"}}>
+                                        Total Price: ₹{totalPrice}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <Link to="/Customer/Checkout" className="checkout-btn">
-                            Checkout
-                        </Link>
+                        <div className="gap-3 d-md-flex justify-content-md-end text-center">
+                            <Link to="/Customer/Checkout" className="btn btn-primary btn-lg">
+                                Checkout
+                            </Link>
+                        </div>
+                        
                     </div>
 
                 </div>
             ) : (
                 <div>
                     <h1>Your Cart is Empty</h1>
-                    <Link to="/customer/home">Continue Shopping</Link>
+                    <Link to="/customer/home" className="btn btn-primary btn-lg">Continue Shopping</Link>
                 </div>
             )}
 
