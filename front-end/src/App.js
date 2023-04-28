@@ -30,7 +30,9 @@ import CustomerAboutus from "./CUSTOMER/customerAboutus";
 import CustomerContactus from "./CUSTOMER/customerContactus";
 //import ProductList from './CUSTOMER/customerproductlist';
 // import Sample from "./ADMIN/sample";
+import Checkout from "./CUSTOMER/checkOut";
 import Cart from "./CUSTOMER/Cart";
+import MyOrders from "./CUSTOMER/MyOrders";
 
 function App() {
   
@@ -54,14 +56,17 @@ function App() {
             </Route>
             <Route element={<CustomerComponent />}>
               <Route path="/customer/home" element={<CustomerHome />} />
+              
+              <Route path="/customer/MyOrders" element={<MyOrders />} />
               <Route path="/customer/aboutus" element={<CustomerAboutus />} />
               <Route path="/customer/contactus" element={<CustomerContactus />} />
               <Route path="/customer/productdetails/:id" element={<ProductDetail/>}/>
               {/* <Route path="/customer/cart/:id:name" element={<CustomerCart/>} /> */}
               <Route path="/customer/Cart" element={<Cart />} />
-             
+              <Route path="/customer/checkOut" element={<Checkout />} />
               <Route path="/customer/profile" element={<CustomerProfile />} />
               <Route path="/customer/changepassword" element={<Userchangepassword />}/>
+              
             </Route>
               <Route path="/" element={<VisitorHome />} />
               <Route path="/Pages/signup" element={<Signup />} />
