@@ -37,7 +37,7 @@ function App() {
   return (
     <div className="App">
         <BrowserRouter>
-          <Nav />
+        <Nav />
           <Routes>
             <Route element={<AdminComponent />}>
               <Route path="/admin/home" element={<AdminHome />} />

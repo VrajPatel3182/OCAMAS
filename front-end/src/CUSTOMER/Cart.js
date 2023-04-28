@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faTrash} from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {faTrash} from '@fortawesome/free-solid-svg-icons'
 // import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Cart = () => {
@@ -90,7 +90,8 @@ const Cart = () => {
                                         <td className="text-center">₹{item.price * item.quantity}</td>
                                         <td className="text-center">
                                             <button className="btn btn-sm btn-outline-danger" onClick={() => removeFromCart(item)}>
-                                                <FontAwesomeIcon icon={faTrash} />
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                {/* <FontAwesomeIcon icon={faTrash} /> */}
                                             </button>
                                         </td>
                                     </tr>
@@ -104,15 +105,16 @@ const Cart = () => {
                         </table>
                         <div className="gap-3 d-md-flex justify-content-md-end text-center">
                             <Link to="/Customer/Checkout" className="btn btn-primary btn-lg">
-                                Checkout
+                            <i class='fas fa-cash-register'></i> Checkout
                             </Link>
+                            
                         </div>
                         
                     </div>
 
                 </div>
             ) : (
-                <div>
+                <div style={{textAlign:"center"}}>
                     <h1>Your Cart is Empty</h1>
                     <Link to="/customer/home" className="btn btn-primary btn-lg">Continue Shopping</Link>
                 </div>

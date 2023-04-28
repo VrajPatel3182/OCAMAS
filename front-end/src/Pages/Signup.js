@@ -94,6 +94,13 @@ const SignUp = () => {
         // alert("you are registered :)");
         //localStorage.setItem('user',JSON.stringify(result.result));
         localStorage.setItem('token',JSON.stringify(result.auth));
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'You are Registered. ',
+            showConfirmButton: false,
+            timer: 1000
+        })
           navigate('/pages/login');
         }
     }
@@ -137,7 +144,7 @@ const SignUp = () => {
                 required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             />
             <div className="inputBox"><label className='genderlabel'>Gender :</label>
-                <input className="radio1" type="radio" name="r1" value="m" onChange={(e)=>setGender(e.target.value)} defaultChecked/><label className='genderlabel'>Male</label>
+                <input className="radio1" type="radio" name="r1" value="m" onChange={(e)=>setGender(e.target.value)} /><label className='genderlabel'>Male</label>
                 <input className="radio1" type="radio" name="r1" value="f" onChange={(e)=>setGender(e.target.value)} /><label className='genderlabel'>Female</label>
             </div>
                 <div className='dwn'>
@@ -182,7 +189,7 @@ const SignUp = () => {
                 value={password} onChange={(e) => setPassword(e.target.value)} required
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             />
-            <button  className="btn-5" type="submit">SignUP</button>
+            <button  className="btn-5" type="submit">SIGNUP</button>
             {/* <div className="btn-5" type="submit">
                     SIGN-UP
                 </div> */}

@@ -14,7 +14,6 @@ const CustomerProfile = () => {
   const [selectedState, setSelectedState] = useState();
   const [setSelectedCity] = useState();
   const tmpcountry = (countryList[101]);
-  
   console.log(tmpcountry)
   
   
@@ -180,10 +179,10 @@ const handleCitySelect = e => {
                       {/* <select type="text" className="form-control" placeholder="" aria-label="Instragram" defaultValue={profile.country} /> */}
                       
                           <select onChange={handleCountrySelect} className="form-control">
-                              <option>--Select Country--</option>
+                              <option>--{}</option>
                               {
                                  countryList.map((country)=>(
-                                      <option key={country.id} value={JSON.stringify(country)}>{country.name}</option>
+                                      <option key={JSON.stringify(country.id)} value={country[profile.country]+"name"}>{country.name}</option>
                                   ))
                               }
                           </select>

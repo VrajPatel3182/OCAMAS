@@ -48,7 +48,7 @@ const productlist = () => {
   
   const defaultMaterialTheme = createTheme();
   return (
-    <div style={{margin:"20px", marginBottom:"35px", marginTop:"80px"}}>
+    <div style={{display:"flexbox",marginBottom:"30px"}}>
       <ThemeProvider theme={defaultMaterialTheme}>
         <MaterialTable
           title="Products"
@@ -73,20 +73,22 @@ const productlist = () => {
             { title: "Stock", field: "stock" },
             { title: "Company", field: "company" },
             {
-              title:"Operation",
-              cellStyle:{textAlign:"center"},
-              render: rowData => <Link to={`/admin/updateproduct/${rowData._id}`}><i className="fa fa-edit" /></Link>
+              title:"Edit",
+              // cellStyle:{textAlign:"center"},
+              render: rowData =><Link to={`/admin/updateproduct/${rowData._id}`}><i className="fa fa-edit" /></Link>
             },
             {
-              cellStyle:{textAlign:"center",width:"10px"},
+              title:"Delete",
+              // cellStyle:{textAlign:"center",width:"10px"},
               render: rowData => <Link onClick={()=>handledelete(rowData._id)} to><i className="fa fa-trash" /></Link>
             }
           ]}
           data={product}
           options={{
-            
             exportButton: true,
-            
+            headerStyle:{
+              backgroundColor:"lightgray"
+            }
           }}
         />
       </ThemeProvider>

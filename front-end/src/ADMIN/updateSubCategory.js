@@ -50,7 +50,7 @@ const updateSubCategory = () => {
     <div className="category">
       <h1 className="heading">Sub-Category Update</h1>  
           <input className="inputBox" onChange={(e)=>setCategory(e.target.value)} value={name} required/>
-        <div onClick={handleUpdate} className='btn-5' type='submit'>submit</div>
+        <div onClick={handleUpdate} className='btn-5' type='submit'>SUBMIT</div>
     </div>
   )
 }

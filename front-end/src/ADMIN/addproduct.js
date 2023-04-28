@@ -91,7 +91,7 @@ const AddProduct=()=>{
     return(
        
         <div className="Product">
-            <h1 className="heading">ADD Product</h1>
+            <h1 className="heading">Add Product</h1>
             <input className="inputBox" type="text" placeholder="Product Name" onChange={(e)=>setName(e.target.value)} value={name}
             />
             <textarea className="textarea" type="text" placeholder="Product Description" onChange={(e)=>setDescription(e.target.value)}

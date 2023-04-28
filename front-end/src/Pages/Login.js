@@ -1,5 +1,6 @@
 import React,{useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 //import validator from 'validator'
 //import jwt from 'jsonwebtoken';
 
@@ -46,7 +47,7 @@ const Login=()=>{
             }
         })
         result = await result.json();
-        console.warn(result);
+        // console.warn(result);
         if(result.auth)
         {
             localStorage.setItem('user',JSON.stringify(result.user));
@@ -63,9 +64,22 @@ const Login=()=>{
                     navigate('/admin/home')
                 }
             }
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Login Success',
+                showConfirmButton: false,
+                timer: 1000
+            })
         }
         else{
-            alert("Enter Valid Username and Password")
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Login Fail',
+                showConfirmButton: false,
+                timer: 1000
+            })
         }
 
         //cosnt usertype = localStorage.getItem()

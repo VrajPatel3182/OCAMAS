@@ -2,13 +2,15 @@ import * as React from 'react';
 import {useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { ThemeProvider, createTheme } from "@mui/material";
+import MaterialTable from "material-table";
+// import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+// import TableCell from '@mui/material/TableCell';
+// import TableContainer from '@mui/material/TableContainer';
+// import TableHead from '@mui/material/TableHead';
+// import TableRow from '@mui/material/TableRow';
+// import Paper from '@mui/material/Paper';
 
 
 export default function ViewSubCategoryList() {
@@ -42,48 +44,40 @@ export default function ViewSubCategoryList() {
             getsubcategory();
           });
     }
+    const defaultMaterialTheme = createTheme();
   return (
     <div >
-      <div className="category">
-        <h1>SubCategory</h1>
+      <div className="category" style={{textAlign:"center"}}>
+        <h1>SubCategory List</h1>  
       </div>
-      <div className="table">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell><b>SubCategoryID</b></TableCell>
-                <TableCell align="th"><b>Subcategory</b></TableCell>
-                <TableCell align="th"><b>Category</b></TableCell>
-                <TableCell align="th"><b>Operation</b></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {subcategory.map((subcategory, k) => (
-                <TableRow
-                  key={k}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {subcategory._id}
-                  </TableCell>
-                  <TableCell align="th">{subcategory.name}</TableCell>
-                  <TableCell align="th">{subcategory.category.name}</TableCell>
-                  <TableCell align="th">
-                    <button
-                      className="deletebutton"
-                      onClick={() => deletecategory(subcategory._id)}
-                    >
-                      DELETE
-                    </button>
-                      <Link  to={"/admin/updatesubcategory/"+subcategory._id}><button className='deletebutton'>UPDATE</button></Link>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
+      <div style={{width:"800px",marginInline:"auto"}}>
+      <ThemeProvider theme={defaultMaterialTheme}>
+        <MaterialTable
+          title="Sub-Category"
+          columns={[
+            { title: "Name", field: "name" },
+            { title: "Category", field: "category.name" },
+            {
+              title:"Edit",
+              //cellStyle:{textAlign:"center"},
+              render: rowData =><Link to={`/admin/updatesubcategory/${rowData._id}`}><i className="fa fa-edit" /></Link>,sorting:false
+            },
+            {
+              title:"Delete",
+              //cellStyle:{textAlign:"center",width:"10px"},
+              render: rowData => <Link onClick={()=>deletecategory(rowData._id)} to><i className="fa fa-trash" /></Link>,sorting:false
+            }
+          ]}
+          data={subcategory}
+          options={{
+            exportButton: true,
+            headerStyle:{
+              backgroundColor:'lightgray'
+            }
+          }}
+        />
+      </ThemeProvider>
+    </div>
     </div>
   );
 }
