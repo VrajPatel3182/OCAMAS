@@ -1,4 +1,5 @@
-import React from "react";
+import { Badge } from "@mui/material";
+import React,{useState}from "react";
 import { Link, useNavigate } from "react-router-dom";
 const Nav = () => {
     
@@ -10,9 +11,13 @@ const Nav = () => {
         navigate('/')
     }
     const handlecart=()=>{
-        navigate('/customer/cart/:id')
+        navigate('/customer/cart')
     }
-    
+
+    const [cartItems] = useState(
+        JSON.parse(localStorage.getItem("cartItems")) || []
+    );
+
     return (
         <div>
             <div className="navbar">
@@ -31,15 +36,15 @@ const Nav = () => {
                                 <button className="subnavbtn-user"><i className="fa fa-user"></i></button>
                                 <div className="subnav-content-user">
                                     <Link to="/customer/profile">Profile</Link>
-                                    {/* <Link to="/Pages/Settings">Settings</Link> */}
+                                    <Link to="/customer/order">Your Order</Link>
                                     {/* <Link to="/Customer/Changepassword">ChangePassword</Link> */}
                                     <Link onClick={logout} to="/"><b>Logout({JSON.parse(user).name})</b></Link>
                                 </div>
                         </div>
-                        <div class="subnav-user">
-                            {/* <button onClick={handlecart} class="subnavbtn-user"><i  class="fa fa-shopping-cart"></i>
+                        <div className="subnav-user">
+                            {/* <button onClick={handlecart} className="subnavbtn-user"><i  className="fa fa-shopping-cart"></i>
                            </button> */}
-                           <Link to="/customer/Cart" className="fa fa-shopping-cart">Cart</Link>
+                           <button onClick={handlecart} className="subnavbtn-user"><Badge  badgeContent={cartItems.length} color="secondary"><span className="fa fa-shopping-cart"></span></Badge></button>
                         </div>
                     </div>
                     :

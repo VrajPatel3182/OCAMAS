@@ -1,5 +1,6 @@
 import  React,{useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import Swal from "sweetalert2";
 
 const AddProduct=()=>{
 
@@ -64,12 +65,18 @@ const AddProduct=()=>{
         formData.append('company',company)
         formData.append('image', image)
 
-        let result = await fetch('http://localhost:5000/addproduct',{
+        await fetch('http://localhost:5000/addproduct',{
             method:'post',
             body:formData
         })
-        result = await result.json();
-        console.log(result);
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Product Added.',
+            showConfirmButton: false,
+            timer: 1000
+        })
+        // result = await result.json();
         navigate("/admin/products")
     }
 

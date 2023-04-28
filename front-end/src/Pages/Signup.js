@@ -73,7 +73,14 @@ const SignUp = () => {
 
     const collectData = async (e) => {
         e.preventDefault();
-        alert(name)
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'You Are Registered.',
+            showConfirmButton: false,
+            timer: 1000
+        })
         if(name != null && email != null && gender != null && selectedCountry!=null && selectedState!=null && selectedCity != null && address!=null && contact!=null && password!=null){
         let result = await fetch("http://localhost:5000/register", {
             method: 'post',
@@ -84,17 +91,10 @@ const SignUp = () => {
         });
         result = await result.json();
         console.warn(result);
-        alert("you are registered :)");
+        // alert("you are registered :)");
         //localStorage.setItem('user',JSON.stringify(result.result));
         localStorage.setItem('token',JSON.stringify(result.auth));
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'You Are Registered.',
-            showConfirmButton: false,
-            timer: 1000
-          })
-          navigate('/pages/login')
+          navigate('/pages/login');
         }
     }
 
