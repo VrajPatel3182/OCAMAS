@@ -21,8 +21,11 @@ const Nav = () => {
                   auth === "1" ?
                   <div>
                         <Link to="/customer/home">Home</Link>
+                        
+                        <Link to="/customer/MyOrders">MyOrder</Link>
                         <Link to="/customer/aboutus">About</Link>
                         <Link to="/customer/contactus">Contact</Link>
+                        
                         {/* <Link to="/customer/productdetails">Product Detail and Purchase</Link> */}
                         <div className="subnav-user">
                                 <button className="subnavbtn-user"><i className="fa fa-user"></i></button>

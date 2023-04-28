@@ -14,7 +14,7 @@ const { ObjectId } = require("mongodb");
 const bodyParser = require("body-parser");
 const { count } = require("./db/Category");
 const Purchase = require("./db/Purchase");
-const orders = require("./db/Orders");
+const orders = require("./db/orders");
 const multer = require('multer');
 const Subcategory = require("./db/Subcategory");
 const Addtocart = require("./db/Cart");
@@ -22,6 +22,62 @@ const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
 //const upload = multer({dest:'./uploads/image'})
 
+// const braintree = require("braintree");
+// var gateway = new braintree.BraintreeGateway({
+//   environment: braintree.Environment.Sandbox,
+//   merchantId: process.env.BRAINTREE_MERCHANT_ID,
+//   publicKey: process.env.BRAINTREE_PUBLIC_KEY,
+//   privateKey: process.env.BRAINTREE_PRIVATE_KEY,
+// });
+
+// //token for payment
+// app.get('braintree/token', async(req,res)=>{
+//   try {
+//     gateway.clientToken.generate({}, function(err,response){
+//       if(err){
+//         res.status(500).send(err);
+
+//       }else{
+//         res.send(response);
+//       }
+//     });
+//   } catch (error) {
+//     console.log(error)
+//   }
+// });
+
+// app.post('braintree/payment', async (req, res) => {
+//   try {
+//     const { cart, nonce } = req.body;
+//     let total = 0;
+//     cart.map((i) => {
+//       total += i.price;
+//     });
+//     let newTransaction = gateway.transaction.sale({
+//       amount: total,
+//       paymentMethodNonce: nonce,
+//       options: {
+//         submitForSettlement: true
+//       }
+//     },
+//     function(error,result) {
+//         if (result) {
+//           const order = new orders({
+//             products: cart,
+//             payment: result,
+//             buyer:req.user_id
+
+//           }).save()
+//           res.json({ok:true})
+//         }else{
+//           res.status(500).send(error)
+//         }
+//       }
+//     )
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 app.use(express.json());
 app.use(cors());
@@ -630,13 +686,50 @@ app.delete("/Purchase/:id", async (req, resp) => {
   }
 });
 
-app.post("/orders", async (req, resp) => {
+// app.post("/orders", async (req, resp) => {
+//   try {
+//     let addorders = new orders(req.body);
+//     let result = await addorders.save();
+//     resp.send(result);
+//   } catch (e) {
+//     console.log(e.message);
+//   }
+// });
+
+// app.post('/orders', async (req, res) => {
+//   try {
+//     const { user, cartItems, totalPrice } = req.body;
+//     const order = new orders({
+//       products: cartItems.map((item) => item._id),
+//       payment: {
+//         method: req.body.paymentMethod
+//       },
+//       buyer: user._id,
+//       totalPrice: totalPrice
+//     });
+//     await order.save();
+//     res.status(201).json(order);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send('Server error');
+//   }
+// });
+
+app.post('/orders', async (req, res) => {
   try {
-    let addorders = new orders(req.body);
-    let result = await addorders.save();
-    resp.send(result);
-  } catch (e) {
-    console.log(e.message);
+    const { user, cartItems, totalPrice } = req.body;
+    const products = await Product.find({ _id: { $in: cartItems.map(item => item._id) } });
+    const order = new orders({
+      buyer: user._id,
+      products,
+      payment: { method: req.body.paymentMethod },
+      totalPrice,
+    });
+    await order.save();
+    res.status(201).json({ message: 'Order placed successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 });
 
@@ -652,6 +745,57 @@ app.get("/vieworders", async (req, resp) => {
     console.log(e.message);
   }
 });
+
+app.get('/orders/:userId', async (req, res) => {
+  try {
+    const order = await orders.find({ buyer: req.params.userId });
+    res.status(200).json(order);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+});
+
+app.get("/orders",async (req, resp) => {
+  try {
+    
+    const order = await orders.findby().populate("products","-picture").populate("buyer","name");
+    if (order.length > 0) {
+      resp.send(order);
+    } else {
+      resp.send({ result: "no orders found" });
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+// app.get("/orders", async (req, resp) => {
+//   try {
+//     const userId = req.body;
+//     let result = await orders.find({ userId: userId });
+//     // console.log(result)
+//     if (result.length > 0) {
+//       resp.send(result);
+//     } else {
+//       resp.send({ result: "No data found" });
+//     }
+//   } catch (e) {
+//     console.log(e.message);
+//   }
+// });
+
+// app.get('/orders/:id', async (req, res) => {
+//   try {
+//     const order = await orders.findById(req.params.id).populate('products');
+//     if (!order) {
+//       return res.status(404).json({ msg: 'Order not found' });
+//     }
+//     res.json(order);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send('Server error');
+//   }
+
 
 app.put("/orders/:id", async (req, resp) => {
   try {
